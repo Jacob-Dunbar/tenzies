@@ -37,6 +37,7 @@ body {
 
 .instructions {
   width: 230px;
+  height: 48px;
 
   font-family: "Inter", sans-serif;
   font-size: 0.8rem;

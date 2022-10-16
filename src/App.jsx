@@ -9,6 +9,8 @@ function App() {
 
   const [endGame, setEndGame] = useState(false);
 
+  const [numOfRolls, setNumOfRolls] = useState(0);
+
   useEffect(() => {
     const targetNumber = dice[0].value;
     const allHeld = dice.every((die) => die.isHeld);
@@ -39,7 +41,10 @@ function App() {
           : { ...die, value: Math.ceil(Math.random() * 6) };
       })
     );
+    setNumOfRolls((prevVal) => prevVal + 1);
   }
+
+  console.log(numOfRolls);
 
   function holdDice(id) {
     setDice(
@@ -68,10 +73,11 @@ function App() {
     <div className="App">
       {endGame && <Confetti />}
       <main className="main">
-        <h1 className="title">Tenzies</h1>
+        <h1 className="title">{endGame ? "You Won!" : "Tenzies"}</h1>
         <p className="instructions">
-          Roll until all dice are the same. Click each die to freeze it at its
-          current value between rolls.
+          {endGame
+            ? `In ${numOfRolls} moves`
+            : "Roll until all dice are the same. Click each die to freeze it at it's current value between rolls."}
         </p>
         <div className="die__container">{diceElements}</div>
         <button onClick={endGame ? restGame : roll}>

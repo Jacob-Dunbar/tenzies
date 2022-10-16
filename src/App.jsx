@@ -1,6 +1,7 @@
 import { useState } from "react";
 import "./style.css";
 import Die from "./components/Die.jsx";
+import { nanoid } from "nanoid";
 
 /**
  * Challenge: Update the array of numbers in state to be
@@ -17,13 +18,17 @@ function App() {
   function allNewDice() {
     const diceArray = [];
     for (let i = 0; i < 10; i++) {
-      diceArray.push({ value: Math.ceil(Math.random() * 6), isHeld: false });
+      diceArray.push({
+        value: Math.ceil(Math.random() * 6),
+        isHeld: false,
+        id: nanoid(),
+      });
     }
     return diceArray;
   }
 
-  const diceElements = dice.map((die, index) => (
-    <Die key={index} value={die.value} />
+  const diceElements = dice.map((die) => (
+    <Die key={die.id} value={die.value} />
   ));
 
   function roll() {

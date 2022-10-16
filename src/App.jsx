@@ -3,15 +3,6 @@ import "./style.css";
 import Die from "./components/Die.jsx";
 import { nanoid } from "nanoid";
 
-/**
- * Challenge: Update the array of numbers in state to be
- * an array of objects instead. Each object should look like:
- * { value: <random number>, isHeld: false }
- *
- * Making this change will break parts of our code, so make
- * sure to update things so we're back to a working state
- */
-
 function App() {
   const [dice, setDice] = useState(allNewDice);
 
@@ -20,11 +11,21 @@ function App() {
     for (let i = 0; i < 10; i++) {
       diceArray.push({
         value: Math.ceil(Math.random() * 6),
-        isHeld: true,
+        isHeld: false,
         id: nanoid(),
       });
     }
     return diceArray;
+  }
+
+  function roll() {
+    setDice(
+      dice.map((die) => {
+        return die.isHeld
+          ? die
+          : { ...die, value: Math.ceil(Math.random() * 6) };
+      })
+    );
   }
 
   function holdDice(id) {
@@ -44,10 +45,6 @@ function App() {
       holdDice={() => holdDice(die.id)}
     />
   ));
-
-  function roll() {
-    setDice(allNewDice);
-  }
 
   return (
     <div className="App">

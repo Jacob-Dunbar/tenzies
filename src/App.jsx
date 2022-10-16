@@ -20,15 +20,33 @@ function App() {
     for (let i = 0; i < 10; i++) {
       diceArray.push({
         value: Math.ceil(Math.random() * 6),
-        isHeld: false,
+        isHeld: true,
         id: nanoid(),
       });
     }
     return diceArray;
   }
 
+  function holdDice(id) {
+    setDice(
+      dice.map((die) => {
+        if (die.id === id) {
+          return { ...die, isHeld: !die.isHeld };
+        } else {
+          return die;
+        }
+      })
+    );
+  }
+
   const diceElements = dice.map((die) => (
-    <Die key={die.id} value={die.value} />
+    <Die
+      id={die.id}
+      key={die.id}
+      value={die.value}
+      isHeld={die.isHeld}
+      holdDice={() => holdDice(die.id)}
+    />
   ));
 
   function roll() {

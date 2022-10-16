@@ -30,11 +30,7 @@ function App() {
   function holdDice(id) {
     setDice(
       dice.map((die) => {
-        if (die.id === id) {
-          return { ...die, isHeld: !die.isHeld };
-        } else {
-          return die;
-        }
+        return die.id === id ? { ...die, isHeld: !die.isHeld } : die;
       })
     );
   }

@@ -67,7 +67,7 @@ function App() {
           current value between rolls.
         </p>
         <div className="die__container">{diceElements}</div>
-        <button onClick={roll}>Roll</button>
+        <button onClick={roll}>{endGame ? "Play Again" : "Roll"}</button>
       </main>
     </div>
   );

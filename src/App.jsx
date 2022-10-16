@@ -11,11 +11,16 @@ function App() {
 
   const [numOfRolls, setNumOfRolls] = useState(0);
 
+  const [highScore, setHighScore] = useState(100);
+
   useEffect(() => {
     const targetNumber = dice[0].value;
     const allHeld = dice.every((die) => die.isHeld);
     const allSame = dice.every((die) => die.value === targetNumber);
     if (allHeld && allSame) {
+      if (numOfRolls < highScore) {
+        setHighScore(numOfRolls);
+      }
       setEndGame(true);
       console.log("You Won!");
     }
@@ -44,8 +49,6 @@ function App() {
     setNumOfRolls((prevVal) => prevVal + 1);
   }
 
-  console.log(numOfRolls);
-
   function holdDice(id) {
     setDice(
       dice.map((die) => {
@@ -67,6 +70,7 @@ function App() {
   function restGame() {
     setDice(allNewDice());
     setEndGame(false);
+    setNumOfRolls(0);
   }
 
   return (
@@ -76,7 +80,7 @@ function App() {
         <h1 className="title">{endGame ? "You Won!" : "Tenzies"}</h1>
         <p className="instructions">
           {endGame
-            ? `In ${numOfRolls} moves`
+            ? `In ${numOfRolls} moves \n Your best is ${highScore}`
             : "Roll until all dice are the same. Click each die to freeze it at it's current value between rolls."}
         </p>
         <div className="die__container">{diceElements}</div>

@@ -1,10 +1,22 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import "./style.css";
 import Die from "./components/Die.jsx";
 import { nanoid } from "nanoid";
 
 function App() {
   const [dice, setDice] = useState(allNewDice);
+
+  const [endGame, setEndGame] = useState(false);
+
+  useEffect(() => {
+    const targetNumber = dice[0].value;
+    const allHeld = dice.every((die) => die.isHeld);
+    const allSame = dice.every((die) => die.value === targetNumber);
+    if (allHeld && allSame) {
+      setEndGame(true);
+      console.log("You Won!");
+    }
+  }, [dice]);
 
   function allNewDice() {
     const diceArray = [];

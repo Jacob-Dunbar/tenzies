@@ -3,7 +3,7 @@ import "./style.css";
 import Die from "./components/Die.jsx";
 
 function App() {
-  const [numbers, setNumbers] = useState(allNewDice);
+  const [dice, setDice] = useState(allNewDice);
 
   function allNewDice() {
     const diceArray = [];
@@ -13,14 +13,19 @@ function App() {
     return diceArray;
   }
 
-  console.log(numbers);
+  const diceElements = dice.map((number, index) => (
+    <Die key={index} value={number} />
+  ));
 
-  const dice = numbers.map((number) => <Die value={number} />);
+  function roll() {
+    setDice(allNewDice);
+  }
 
   return (
     <div className="App">
       <main className="main">
-        <div className="die__container">{dice}</div>
+        <div className="die__container">{diceElements}</div>
+        <button onClick={roll}>Roll</button>
       </main>
     </div>
   );

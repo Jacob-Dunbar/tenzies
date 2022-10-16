@@ -29,6 +29,26 @@ body {
   align-items: center;
 }
 
+.title {
+  font-size: 1.6rem;
+  margin-bottom: 2px;
+  color: #2b283a;
+}
+
+.instructions {
+  width: 230px;
+
+  font-family: "Inter", sans-serif;
+  font-size: 0.8rem;
+  font-weight: 400;
+  line-height: 16px;
+  letter-spacing: -0.03em;
+  text-align: center;
+  color: #4a4e74;
+
+  margin-bottom: 23px;
+}
+
 .die__container {
   width: 100%;
   display: grid;

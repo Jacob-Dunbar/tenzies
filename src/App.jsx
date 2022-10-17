@@ -12,7 +12,9 @@ function App() {
 
   const [numOfRolls, setNumOfRolls] = useState(0);
 
-  const [highScore, setHighScore] = useState(100);
+  const [highScore, setHighScore] = useState(
+    JSON.parse(localStorage.getItem("highScore")) || 100
+  );
 
   useEffect(() => {
     const targetNumber = dice[0].value;
@@ -21,11 +23,14 @@ function App() {
     if (allHeld && allSame) {
       if (numOfRolls < highScore) {
         setHighScore(numOfRolls);
+        localStorage.setItem("highScore", JSON.stringify(numOfRolls));
       }
       setEndGame(true);
       console.log("You Won!");
     }
   }, [dice]);
+
+  console.log(highScore);
 
   function allNewDice() {
     const diceArray = [];

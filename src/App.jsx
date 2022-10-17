@@ -3,6 +3,7 @@ import "./style.css";
 import Die from "./components/Die.jsx";
 import { nanoid } from "nanoid";
 import Confetti from "react-confetti";
+import Paragraph from "./components/Paragraph";
 
 function App() {
   const [dice, setDice] = useState(allNewDice);
@@ -78,11 +79,11 @@ function App() {
       {endGame && <Confetti />}
       <main className="main">
         <h1 className="title">{endGame ? "You Won!" : "Tenzies"}</h1>
-        <p className="instructions">
-          {endGame
-            ? `In ${numOfRolls} moves \n Your best is ${highScore}`
-            : "Roll until all dice are the same. Click each die to freeze it at it's current value between rolls."}
-        </p>
+        <Paragraph
+          endGame={endGame}
+          highScore={highScore}
+          numOfRolls={numOfRolls}
+        />
         <div className="die__container">{diceElements}</div>
         <button onClick={endGame ? restGame : roll}>
           {endGame ? "Play Again" : "Roll"}

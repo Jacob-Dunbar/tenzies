@@ -6,7 +6,11 @@ const Paragraph = (props) => {
       <div className="instructions">
         <p className="result__moves">In {props.numOfRolls} moves.</p>
 
-        <p className="result__high">Your best is {props.highScore}</p>
+        <p className="result__high">
+          {props.highScore === props.numOfRolls
+            ? "NEW BEST!"
+            : `Your best is ${props.highScore}`}
+        </p>
       </div>
     );
   } else {

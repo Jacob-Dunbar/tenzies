@@ -1,4 +1,4 @@
-# Digital Business Card
+# Tenzies Game
 
 This is another project from the Scrimba Learn React course.
 
